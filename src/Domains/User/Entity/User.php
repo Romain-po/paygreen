@@ -2,10 +2,10 @@
 
 namespace App\Domains\User\Entity;
 
+use App\Domains\User\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use App\Domains\User\Repository\UserRepository;
 
 /**
  * @ORM\Table(name="user")
@@ -38,7 +38,7 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      * @Groups({"user_list"})
      */
-    private string $username;
+    private string $userName;
 
     /**
      * @ORM\Column(type="json")
@@ -67,14 +67,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getUsername(): string
+    public function getUserName(): string
     {
-        return $this->username;
+        return $this->userName;
     }
 
-    public function setUsername(string $username): self
+    public function setUserName(string $userName): self
     {
-        $this->username = $username;
+        $this->userName = $userName;
 
         return $this;
     }
@@ -102,7 +102,7 @@ class User implements UserInterface
 
     public function getUserIdentifier(): string
     {
-        return $this->getUsername();
+        return $this->getUserName();
     }
 
     public function eraseCredentials()

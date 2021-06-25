@@ -18,7 +18,7 @@ class UserRepository extends ServiceEntityRepository
 
         if ($filter) {
             $qb->andWhere('u.email LIKE :filter OR u.username LIKE :filter')
-                ->setParameter('filter', '%'.$filter.'%');
+                ->setParameter('filter', '%' . $filter . '%');
         }
 
         return $qb->getQuery()->getResult();

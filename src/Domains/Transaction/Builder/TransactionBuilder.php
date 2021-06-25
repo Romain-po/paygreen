@@ -30,5 +30,4 @@ class TransactionBuilder
 
         return $transaction;
     }
-
 }

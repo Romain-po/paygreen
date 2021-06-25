@@ -2,13 +2,14 @@
 
 namespace App\Domains\Transaction\Controller;
 
+use App\Domains\Transaction\Builder\TransactionBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Domains\Transaction\Builder\TransactionBuilder;
 
 class PostTransactionController extends AbstractController
 {
@@ -25,9 +26,9 @@ class PostTransactionController extends AbstractController
      * @Route("/", name="create", methods={"POST"})
      * @IsGranted("ROLE_USER", statusCode=401, message="Unauthorized")
      */
-    public function __invoke( $requestStack): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
-        $transactionData = json_decode($requestStack->getCurrentRequest()->getContent(), true) ?? [];
+        $transactionData = json_decode($request->getContent(), true) ?? [];
         $transaction = $this->transactionBuilder->createDefaultFromData($transactionData);
 
         $this->entityManager->persist($transaction);
