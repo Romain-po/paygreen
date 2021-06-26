@@ -9,7 +9,7 @@ class PostTransactionControllerTest extends WebTestCase
     /**
      * @dataProvider getTransactionData
      */
-    public function testPostTransactionIsSuccessfull(array $transactionData)
+    public function testPostTransactionIsSuccessfull($transactionData)
     {
         $content = json_encode($transactionData);
 
@@ -47,5 +47,4 @@ class PostTransactionControllerTest extends WebTestCase
             'isActive' => true,
         ];
     }
-
 }

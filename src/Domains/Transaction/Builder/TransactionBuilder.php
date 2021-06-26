@@ -6,12 +6,12 @@ use App\Domains\Transaction\Entity\Transaction;
 
 class TransactionBuilder
 {
-    public function createDefaultFromData($data): Transaction
+    public function createDefaultFromData(array $data): Transaction
     {
         return $this->buildEntityFromData(new Transaction(), $data);
     }
 
-    public function updateDefaultFromData(Transaction $transaction, $data): Transaction
+    public function updateDefaultFromData(Transaction $transaction, array $data): Transaction
     {
         return $this->buildEntityFromData($transaction, $data);
     }

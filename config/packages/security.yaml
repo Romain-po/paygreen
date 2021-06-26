@@ -1,17 +1,21 @@
 security:
     enable_authenticator_manager: true
     providers:
-        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: 'App\Domains\User\Entity'
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
             json_login:
                 check_path: /login
-
-    access_control:
-
+                username_path: email
+                password_path: password
+    password_hashers:
+        App\Domains\User\Entity:
+            algorithm: auto

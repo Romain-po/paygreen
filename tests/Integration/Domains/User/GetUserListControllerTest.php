@@ -20,6 +20,7 @@ class GetUserListControllerTest extends WebTestCase
         $userData = json_decode($response, true);
 
         $this->assertNotEmpty($userData);
+
         foreach ($userData as $user) {
             $this->assertArrayHasKey('id', $user);
             $this->assertArrayHasKey('email', $user);

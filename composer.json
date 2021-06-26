@@ -7,11 +7,13 @@
         "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "composer/package-versions-deprecated": "1.11.99.2",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.9",
+        "friendsofphp/php-cs-fixer": "2.16.*",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "5.3.*",
@@ -41,13 +43,13 @@
         "symfony/web-link": "5.3.*",
         "symfony/yaml": "5.3.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0",
-      "ext-json": "*"
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.3",
         "symfony/css-selector": "^5.3",
+        "phpstan/phpstan": "^0.12.23",
         "symfony/debug-bundle": "^5.3",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.3",
@@ -87,6 +89,20 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "dev": [
+            "composer phpcs",
+            "composer phpstan",
+            "composer phpunit"
+        ],
+        "phpcs": [
+            "vendor/bin/php-cs-fixer fix --config=.php_cs --diff --allow-risky=yes"
+        ],
+        "phpstan": [
+            "vendor/bin/phpstan analyse -l 5 src tests"
+        ],
+        "phpunit": [
+            "vendor/bin/phpunit"
         ]
     },
     "conflict": {
